@@ -55,19 +55,14 @@ let chosenDepartment = "";
 function renderProducts() {
   let html = ""; // Your code here!
   let inStockItems = products.filter((product) => product.quantity > 0);
-  let departmentItems = inStockItems.filter((product) => {
-    if (chosenDepartment === "") {
-      return true;
-    }
-    return product.department === chosenDepartment;
-  });
-  let mappedItems = departmentItems.map(product => "<li> <h3> ${product.name} </h3> $${product.price} </li>");
+  let departmentItems = inStockItems.filter((product) => 
+  chosenDepartment ? product.department === chosenDepartment : true 
+  );
+  let mappedItems = departmentItems.map(
+      (product) => `<li> <h3> ${product.name} </h3> $${product.price} </li>`
+      );
 
-  html = mappedItems.reduce((accum, currentVal)=> accum + currentVal );
-
-console.log("Current chosenDepartment", chosenDepartment);
-console.log("current item list", departmentItems);
-    // using the product array
+  html = mappedItems.reduce((accum, currentVal) => accum + currentVal);
 
     // Perform a filter, a map, and a reduce function. (Just like in the reading!)
 
